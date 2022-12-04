@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace BuildingBlocks.Web
 {
-
     [ApiController]
     [Route("api/[controller]")]
     public abstract class BaseController : ControllerBase

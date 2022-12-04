@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Serilog;
 using Serilog.Events;
+using Serilog.Exceptions;
 using Serilog.Formatting.Compact;
 using Serilog.Sinks.SpectreConsole;
 
@@ -21,9 +22,13 @@ public static class Extensions
                    ? level
                    : LogEventLevel.Information;
 
-            loggerConfiguration.MinimumLevel.Is(logLevel)
-            .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
-            .MinimumLevel.Override("Microsoft.Hosting.Lifetime", LogEventLevel.Information);
+            loggerConfiguration
+                .MinimumLevel.Is(logLevel)
+                .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+                .MinimumLevel.Override("Microsoft.Hosting.Lifetime", LogEventLevel.Information)
+                .Enrich.WithExceptionDetails()
+                .Enrich.FromLogContext();
+
             if (loggerOptions.PrintToConsole) loggerConfiguration.WriteTo.SpectreConsole(loggerOptions.LogTemplate, logLevel);
             if (loggerOptions.StructuredLoggerOptions.Enable)
             {

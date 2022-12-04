@@ -1,6 +1,6 @@
+using System.Diagnostics;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using System.Diagnostics;
 
 namespace BuildingBlocks.Logging
 {
@@ -17,7 +17,7 @@ namespace BuildingBlocks.Logging
 
         public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Handling {X-RequestData}.", typeof(TRequest).Name);
+            _logger.LogInformation("Handling {X-RequestData}", typeof(TRequest).Name);
 
             var timer = new Stopwatch();
             timer.Start();
@@ -31,7 +31,7 @@ namespace BuildingBlocks.Logging
                 _logger.LogWarning("The request {X-RequestData} took {TimeTaken} seconds.", typeof(TRequest).Name, timeTaken.Seconds);
             }
 
-            _logger.LogInformation("Handled {X-RequestData}.", typeof(TRequest).Name);
+            _logger.LogInformation("Handled {X-RequestData}", typeof(TRequest).Name);
             return response;
         }
     }

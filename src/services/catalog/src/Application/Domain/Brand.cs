@@ -7,6 +7,5 @@ namespace FluentPOS.Services.Catalog.Application.Domain
 {
     public class Brand
     {
-        
     }
 }
