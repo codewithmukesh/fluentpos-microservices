@@ -4,8 +4,8 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>FluentPOS.Catalog.Api</RootNamespace>
-    <AssemblyName>FluentPOS.Catalog.Api</AssemblyName>
+    <RootNamespace>FluentPOS.Catalog.API</RootNamespace>
+    <AssemblyName>FluentPOS.Catalog.API</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

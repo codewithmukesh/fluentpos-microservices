@@ -1,5 +1,6 @@
 using BuildingBlocks.CQRS;
 using BuildingBlocks.Logging;
+using FluentPOS.Catalog.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(o => o.EnableAnnotations());
 
 // Register BB Services
-builder.Services.UseCommonMediatR(typeof(CatalogApplication).Assembly, enableLoggingBehavior: true);
+builder.Services.UseCommonMediatR(typeof(CatalogRoot).Assembly, enableLoggingBehavior: true);
 
 var app = builder.Build();
 

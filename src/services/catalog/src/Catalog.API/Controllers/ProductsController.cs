@@ -4,7 +4,7 @@ using FluentPOS.Catalog.Products.Features;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace FluentPOS.Catalog.Api.Controllers;
+namespace FluentPOS.Catalog.API.Controllers;
 
 public class ProductsController : BaseController
 {

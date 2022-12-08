@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FluentPOS.Catalog.Products.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace FluentPOS.Catalog.Data
 {
