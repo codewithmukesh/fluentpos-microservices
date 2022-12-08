@@ -28,3 +28,8 @@ dotnet dev-certs https --trust
 
  Once the certificates are installed, navigate to `deployments/docker-compose` and run `docker compose up`.
  
+## References
+
+### Adding Migrations
+
+`dotnet ef migrations add Initial --project src/services/catalog/src/Catalog/ -o Data/Migrations`
