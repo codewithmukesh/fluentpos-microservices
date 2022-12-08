@@ -1,4 +1,4 @@
-namespace FluentPOS.Catalog.Application.Products.Dtos;
+namespace FluentPOS.Catalog.Products.Dtos;
 
 public class ProductResponseDto
 {

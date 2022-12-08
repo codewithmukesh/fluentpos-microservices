@@ -15,19 +15,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "catalog", "catalog", "{B4A2
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{18626C7B-D825-40F7-824E-5A98BAF506C0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Host", "src\services\catalog\src\Host\Host.csproj", "{3801EE1D-C055-4D92-A096-9FF9A9254ADE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catalog.API", "src\services\catalog\src\Catalog.API\Catalog.API.csproj", "{3801EE1D-C055-4D92-A096-9FF9A9254ADE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "identity", "identity", "{37F831E5-AA0F-45B7-AAD0-F7FE4A1F4B58}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D09A4A27-2B44-40EF-BB85-2CFBC8F90082}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Host", "src\services\identity\src\Host\Host.csproj", "{BCCE290E-0746-497D-B45F-0A447B458036}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.API", "src\services\identity\src\Identity.API\Identity.API.csproj", "{BCCE290E-0746-497D-B45F-0A447B458036}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildingBlocks", "src\building-blocks\BuildingBlocks.csproj", "{10ED41E7-E82F-407E-B19A-DFBEC78D9D73}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "building-blocks", "building-blocks", "{DF86A3C0-EFDA-40C2-AB7A-5181C681AD91}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "src\services\catalog\src\Application\Application.csproj", "{BDBB3724-D02C-4C61-B33B-063E04C5D686}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catalog", "src\services\catalog\src\Catalog\Catalog.csproj", "{BDBB3724-D02C-4C61-B33B-063E04C5D686}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

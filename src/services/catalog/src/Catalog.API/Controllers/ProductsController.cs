@@ -1,10 +1,10 @@
 using BuildingBlocks.Web;
-using FluentPOS.Catalog.Application.Products.Dtos;
-using FluentPOS.Catalog.Application.Products.Features;
+using FluentPOS.Catalog.Products.Dtos;
+using FluentPOS.Catalog.Products.Features;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace FluentPOS.Catalog.Host.Controllers;
+namespace FluentPOS.Catalog.Api.Controllers;
 
 public class ProductsController : BaseController
 {

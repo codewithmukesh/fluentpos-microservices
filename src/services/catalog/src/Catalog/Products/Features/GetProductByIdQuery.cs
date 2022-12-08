@@ -1,8 +1,8 @@
 using BuildingBlocks.Cache;
 using BuildingBlocks.CQRS;
-using FluentPOS.Catalog.Application.Products.Dtos;
+using FluentPOS.Catalog.Products.Dtos;
 
-namespace FluentPOS.Catalog.Application.Products.Features;
+namespace FluentPOS.Catalog.Products.Features;
 
 public class GetProductByIdQuery : IQuery<ProductResponseDto>, ICacheRequest
 {

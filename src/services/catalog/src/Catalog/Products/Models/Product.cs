@@ -1,4 +1,4 @@
-namespace FluentPOS.Catalog.Application.Products.Models;
+namespace FluentPOS.Catalog.Products.Models;
 
 public class Product
 {

@@ -1,6 +1,5 @@
 using BuildingBlocks.CQRS;
 using BuildingBlocks.Logging;
-using FluentPOS.Catalog.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 
