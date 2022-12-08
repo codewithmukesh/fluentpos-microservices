@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Serilog;
 
 namespace BuildingBlocks.EFCore;
@@ -32,6 +33,10 @@ public static class Extensions
     where T : DbContext
     {
         MigrateDatabaseAsync<T>(applicationBuilder.ApplicationServices).GetAwaiter().GetResult();
+        if (webHostEnvironment.IsDevelopment())
+        {
+            SeedDataAsync(applicationBuilder.ApplicationServices).GetAwaiter().GetResult();
+        }
         return applicationBuilder;
     }
     private static async Task MigrateDatabaseAsync<T>(IServiceProvider serviceProvider)
@@ -44,6 +49,15 @@ public static class Extensions
         {
             logger.Information($"Applying Migrations for {typeof(T).Name}.");
             await context.Database.MigrateAsync();
+        }
+    }
+    private static async Task SeedDataAsync(IServiceProvider serviceProvider)
+    {
+        using var scope = serviceProvider.CreateScope();
+        var seeders = scope.ServiceProvider.GetServices<IDataSeeder>();
+        foreach (var seeder in seeders)
+        {
+            await seeder.SeedAllAsync();
         }
     }
 }

@@ -3,6 +3,7 @@ using BuildingBlocks.EFCore;
 using BuildingBlocks.Logging;
 using FluentPOS.Catalog.Application;
 using FluentPOS.Catalog.Data;
+using FluentPOS.Catalog.Data.Seeders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(o => o.EnableAnnotations());
 builder.Services.AddEFCoreDbContext<CatalogDbContext>(builder.Configuration, BuildingBlocks.Enums.Database.PostgreSQL);
+builder.Services.AddScoped<IDataSeeder, ProductDataSeeder>();
 // Register BB Services
 builder.Services.UseCommonMediatR(typeof(CatalogRoot).Assembly, enableLoggingBehavior: true);
 

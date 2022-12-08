@@ -3,6 +3,7 @@ using BuildingBlocks.CQRS;
 using FluentPOS.Catalog.Data;
 using FluentPOS.Catalog.Products.Dtos;
 using FluentPOS.Catalog.Products.Exceptions;
+using Mapster;
 using Microsoft.EntityFrameworkCore;
 
 namespace FluentPOS.Catalog.Products.Features;
@@ -26,7 +27,7 @@ internal class GetProductByIdQueryHandler : IQueryHandler<GetProductByIdQuery, P
     {
         var product = await _catalogDbContext.Products.AsQueryable().SingleOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
         if (product is null) throw new ProductNotFoundException(request.Id);
-        //TODO : Add Automapper here
-        return new ProductResponseDto { Id = 1, Description = "test", Name = "test", Price = 10 };
+        var productDto = product.Adapt<ProductResponseDto>();
+        return productDto;
     }
 }
