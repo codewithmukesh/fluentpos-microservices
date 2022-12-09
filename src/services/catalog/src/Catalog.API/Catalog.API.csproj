@@ -22,4 +22,12 @@
     <ProjectReference Include="..\Catalog\Catalog.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EditorConfigFiles Remove="D:\Projects\fluentpos-microservices\src\services\catalog\src\Catalog.API\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="D:\Projects\fluentpos-microservices\src\services\catalog\src\Catalog.API\.editorconfig" />
+  </ItemGroup>
+
 </Project>

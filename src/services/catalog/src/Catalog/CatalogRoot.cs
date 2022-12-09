@@ -1,6 +1,5 @@
-﻿namespace FluentPOS.Catalog.Application
+﻿namespace FluentPOS.Catalog.Application;
+
+public class CatalogRoot
 {
-    public class CatalogRoot
-    {
-    }
 }

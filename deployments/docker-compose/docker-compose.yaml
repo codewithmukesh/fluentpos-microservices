@@ -17,7 +17,6 @@ services:
       - ${USERPROFILE}\.aspnet\https:/https
     networks:
      - fluentpos 
-
   catalog:
     container_name: "catalog-svc"
     image: iammukeshm/fluentpos-catalog-service

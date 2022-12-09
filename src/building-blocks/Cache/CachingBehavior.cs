@@ -1,6 +1,5 @@
-namespace BuildingBlocks.Cache
+namespace BuildingBlocks.Cache;
+
+public class CachingBehavior
 {
-    public class CachingBehavior
-    {
-    }
 }

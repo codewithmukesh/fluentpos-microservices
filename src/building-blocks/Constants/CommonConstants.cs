@@ -1,7 +1,6 @@
-﻿namespace BuildingBlocks.Constants
+﻿namespace BuildingBlocks.Constants;
+
+public static class CommonConstants
 {
-    public static class CommonConstants
-    {
-        public static readonly string DefaultConnection = "DefaultConnection";
-    }
+    public static readonly string DefaultConnection = "DefaultConnection";
 }

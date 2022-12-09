@@ -1,8 +1,7 @@
-﻿namespace BuildingBlocks.Enums
+﻿namespace BuildingBlocks.Enums;
+
+public enum Database
 {
-    public enum Database
-    {
-        SQLServer,
-        PostgreSQL
-    }
+    SQLServer,
+    PostgreSQL
 }

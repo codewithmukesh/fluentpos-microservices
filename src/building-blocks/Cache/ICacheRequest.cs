@@ -1,7 +1,6 @@
-namespace BuildingBlocks.Cache
+namespace BuildingBlocks.Cache;
+
+public interface ICacheRequest
 {
-    public interface ICacheRequest
-    {
-        public string? CacheKey { get; }
-    }
+    public string? CacheKey { get; }
 }

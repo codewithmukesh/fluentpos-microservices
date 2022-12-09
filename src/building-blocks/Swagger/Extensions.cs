@@ -1,12 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 
-namespace BuildingBlocks.Swagger
+namespace BuildingBlocks.Swagger;
+
+public static class Extensions
 {
-    public static class Extensions
+    public static IApplicationBuilder UseCommonSwagger(this IApplicationBuilder app)
     {
-        public static IApplicationBuilder UseCommonSwagger(this IApplicationBuilder app)
-        {
-            return app;
-        }
+        return app;
     }
 }

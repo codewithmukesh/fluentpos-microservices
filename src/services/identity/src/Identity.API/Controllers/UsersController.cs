@@ -1,14 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace FluentPOS.Services.Identity.Host.Controllers
+namespace FluentPOS.Services.Identity.Host.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class UsersController : ControllerBase
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class UsersController : ControllerBase
+    [HttpPost]
+    public void RegisterUser()
     {
-        [HttpPost]
-        public void RegisterUser()
-        {
-        }
     }
 }

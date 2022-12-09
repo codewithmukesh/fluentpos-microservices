@@ -1,6 +1,5 @@
-namespace FluentPOS.Services.Catalog.Domain
+namespace FluentPOS.Services.Catalog.Domain;
+
+public class Category
 {
-    public class Category
-    {
-    }
 }
