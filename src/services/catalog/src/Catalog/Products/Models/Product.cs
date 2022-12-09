@@ -7,9 +7,9 @@ public class Product
     public string? Description { get; private set; }
     public decimal Price { get; private set; }
 
-    public static Product Create(int id, string name, string description, decimal price)
+    public static Product Create(string name, string description, decimal price)
     {
-        var product = new Product() { Id = id, Name = name, Description = description, Price = price };
+        var product = new Product() { Name = name, Description = description, Price = price };
         return product;
     }
 }

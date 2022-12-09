@@ -23,8 +23,8 @@ namespace FluentPOS.Catalog.Data.Seeders
                 _logger.LogInformation("Data Seeding for Products Started.");
                 var products = new List<Product>
                 {
-                    Product.Create(1,"Samsung S24", "Top End", 1299),
-                    Product.Create(2,"iPhone 15 Pro Max", "Top End", 2299),
+                    Product.Create("Samsung S24", "Top End", 1299),
+                    Product.Create("iPhone 15 Pro Max", "Top End", 2299),
                 };
                 await _context.Products!.AddRangeAsync(products);
                 await _context.SaveChangesAsync();
