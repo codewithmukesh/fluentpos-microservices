@@ -25,7 +25,7 @@ internal class GetProductByIdQueryHandler : IQueryHandler<GetProductByIdQuery, P
     }
     public async Task<ProductResponseDto> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
     {
-        var product = await _catalogDbContext.Products.AsQueryable().SingleOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
+        var product = await _catalogDbContext.Products!.AsQueryable().SingleOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
         if (product is null) throw new ProductNotFoundException(request.Id);
         var productDto = product.Adapt<ProductResponseDto>();
         return productDto;

@@ -17,7 +17,7 @@ public static class Extensions
         {
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
             var loggerOptions = context.Configuration.GetSection(nameof(LoggerOptions)).Get<LoggerOptions>();
-
+            if (loggerOptions is null) return;
             var logLevel = Enum.TryParse<LogEventLevel>(
                 loggerOptions.Level,
                 true,
