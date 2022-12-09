@@ -1,5 +1,4 @@
 using BuildingBlocks.Web;
-using FluentPOS.Catalog.Products.Dtos;
 using FluentPOS.Catalog.Products.Features;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -10,12 +9,12 @@ namespace FluentPOS.Catalog.API.Controllers;
 public class ProductsController : BaseController
 {
     [HttpGet("{productId:int}")]
-    [ProducesResponseType(typeof(ProductResponseDto), StatusCodes.Status200OK)]
+    [ProducesResponseType((int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.NotFound)]
     [SwaggerOperation(Summary = "gets product by id.", Description = "gets product by id.")]
     public async Task<IActionResult> GetByIdAsync(int productId, CancellationToken cancellationToken)
     {
         var result = await Mediator.Send(new GetProductByIdQuery(productId), cancellationToken);
-
         return Ok(result);
     }
 
