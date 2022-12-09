@@ -1,4 +1,6 @@
-﻿using BuildingBlocks.Enums;
+﻿using BuildingBlocks.Constants;
+using BuildingBlocks.Enums;
+using BuildingBlocks.WebHostEnvironment;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -15,7 +17,7 @@ public static class Extensions
         where T : DbContext
     {
         var assemblyName = typeof(T).Assembly.GetName().Name;
-        var connectionString = configuration.GetConnectionString(Constants.DefaultConnection);
+        var connectionString = configuration.GetConnectionString(CommonConstants.DefaultConnection);
         switch (databaseChoice)
         {
             case Database.PostgreSQL:
@@ -33,7 +35,7 @@ public static class Extensions
     where T : DbContext
     {
         MigrateDatabaseAsync<T>(applicationBuilder.ApplicationServices).GetAwaiter().GetResult();
-        if (webHostEnvironment.IsDevelopment())
+        if (webHostEnvironment.IsDevelopment() || webHostEnvironment.IsDockerDevelopment())
         {
             SeedDataAsync(applicationBuilder.ApplicationServices).GetAwaiter().GetResult();
         }

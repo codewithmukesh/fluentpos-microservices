@@ -2,6 +2,7 @@ using BuildingBlocks.CQRS;
 using BuildingBlocks.EFCore;
 using BuildingBlocks.Logging;
 using BuildingBlocks.Middlewares;
+using BuildingBlocks.WebHostEnvironment;
 using FluentPOS.Catalog.Application;
 using FluentPOS.Catalog.Data;
 using FluentPOS.Catalog.Data.Seeders;
@@ -25,7 +26,7 @@ var app = builder.Build();
 app.UseEFCoreMigration<CatalogDbContext>(builder.Environment);
 app.UseMiddleware<ExceptionMiddleware>();
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsDockerDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI(o => o.DefaultModelsExpandDepth(-1));

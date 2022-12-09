@@ -9,7 +9,7 @@ services:
       - 5010:5010
       - 5100:5100
     environment:
-      - ASPNETCORE_ENVIRONMENT=docker
+      - ASPNETCORE_ENVIRONMENT=DockerDevelopment
       - ASPNETCORE_URLS=https://+:5100;http://+:5010
       - ASPNETCORE_Kestrel__Certificates__Default__Password=password!
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/dev_cert.pfx
@@ -19,25 +19,27 @@ services:
      - fluentpos 
 
   catalog:
-    container_name: "catalog"
+    container_name: "catalog-svc"
     image: iammukeshm/fluentpos-catalog-service
     pull_policy: always
     environment:
-      - ASPNETCORE_ENVIRONMENT=docker
+      - ASPNETCORE_ENVIRONMENT=DockerDevelopment
+      - "ConnectionStrings:DefaultConnection=Server=catalog-pg;Port=5200;Database=catalogDb;User Id=admin;Password=admin"
     depends_on:
       catalog-pg:
         condition: service_healthy
     networks:
      - fluentpos    
   catalog-pg:
-    container_name: "catalog-postgres"
-    image: postgres:14.5-alpine
+    container_name: "catalog-db"
+    image: postgres:15-alpine
     environment:
       - POSTGRES_DATABASE=admin
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin
+      - PGPORT=5200
     ports:
-      - 5200:5432
+      - 5200:5200
     volumes:
       - catalog-pg-data:/data/db
     healthcheck:
