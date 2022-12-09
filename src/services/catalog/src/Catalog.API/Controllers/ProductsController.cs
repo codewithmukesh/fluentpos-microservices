@@ -3,6 +3,7 @@ using FluentPOS.Catalog.Products.Dtos;
 using FluentPOS.Catalog.Products.Features;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using System.Net;
 
 namespace FluentPOS.Catalog.API.Controllers;
 
@@ -19,22 +20,22 @@ public class ProductsController : BaseController
     }
 
     [HttpPost]
-    [ProducesResponseType(typeof(int), StatusCodes.Status201Created)]
+    [ProducesResponseType((int)HttpStatusCode.Created)]
     [SwaggerOperation(Summary = "creates a new product and returns id.", Description = "creates a new product and returns id.")]
     public async Task<IActionResult> CreateAsync(CreateProductCommand command, CancellationToken cancellationToken)
     {
         var result = await Mediator.Send(command, cancellationToken);
-
-        return Ok(result);
+        return Created(nameof(CreateAsync), new { id = result });
     }
 
     [HttpDelete("{productId:int}")]
-    [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
+    [ProducesResponseType((int)HttpStatusCode.NoContent)]
+    [ProducesResponseType((int)HttpStatusCode.NotFound)]
     [SwaggerOperation(Summary = "deletes a product by id.", Description = "deletes a product by id.")]
     public async Task<IActionResult> DeleteAsync(int productId, CancellationToken cancellationToken)
     {
-        var result = await Mediator.Send(new DeleteProductCommand(productId), cancellationToken);
+        await Mediator.Send(new DeleteProductCommand(productId), cancellationToken);
 
-        return Ok(result);
+        return NoContent();
     }
 }
