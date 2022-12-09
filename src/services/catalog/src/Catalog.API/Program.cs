@@ -1,5 +1,7 @@
+using BuildingBlocks.Constants;
 using BuildingBlocks.CQRS;
 using BuildingBlocks.EFCore;
+using BuildingBlocks.Enums;
 using BuildingBlocks.Logging;
 using BuildingBlocks.Middlewares;
 using BuildingBlocks.WebHostEnvironment;
@@ -15,7 +17,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(o => o.EnableAnnotations());
-builder.Services.AddEFCoreDbContext<CatalogDbContext>(builder.Configuration, BuildingBlocks.Enums.Database.PostgreSQL);
+builder.Services.AddEFCoreDbContext<CatalogDbContext>(builder.Configuration, Database.PostgreSQL, ConnectionStrings.DefaultConnection);
 builder.Services.AddScoped<IDataSeeder, ProductDataSeeder>();
 // Register BB Services
 builder.Services.UseCommonMediatR(typeof(CatalogRoot).Assembly, enableLoggingBehavior: true);

@@ -1,5 +1,4 @@
-﻿using BuildingBlocks.Constants;
-using BuildingBlocks.Enums;
+﻿using BuildingBlocks.Enums;
 using BuildingBlocks.WebHostEnvironment;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -13,11 +12,11 @@ namespace BuildingBlocks.EFCore;
 
 public static class Extensions
 {
-    public static IServiceCollection AddEFCoreDbContext<T>(this IServiceCollection services, IConfiguration configuration, Database databaseChoice)
+    public static IServiceCollection AddEFCoreDbContext<T>(this IServiceCollection services, IConfiguration configuration, Database databaseChoice, string connectionStringName)
         where T : DbContext
     {
         var assemblyName = typeof(T).Assembly.GetName().Name;
-        var connectionString = configuration.GetConnectionString(CommonConstants.DefaultConnection);
+        var connectionString = configuration.GetConnectionString(connectionStringName);
         switch (databaseChoice)
         {
             case Database.PostgreSQL:
