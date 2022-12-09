@@ -1,6 +1,7 @@
 using BuildingBlocks.CQRS;
 using BuildingBlocks.EFCore;
 using BuildingBlocks.Logging;
+using BuildingBlocks.Middlewares;
 using FluentPOS.Catalog.Application;
 using FluentPOS.Catalog.Data;
 using FluentPOS.Catalog.Data.Seeders;
@@ -17,12 +18,12 @@ builder.Services.AddEFCoreDbContext<CatalogDbContext>(builder.Configuration, Bui
 builder.Services.AddScoped<IDataSeeder, ProductDataSeeder>();
 // Register BB Services
 builder.Services.UseCommonMediatR(typeof(CatalogRoot).Assembly, enableLoggingBehavior: true);
-
+builder.Services.AddSingleton<ExceptionMiddleware>();
 var app = builder.Build();
 
 //
 app.UseEFCoreMigration<CatalogDbContext>(builder.Environment);
-
+app.UseMiddleware<ExceptionMiddleware>();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
