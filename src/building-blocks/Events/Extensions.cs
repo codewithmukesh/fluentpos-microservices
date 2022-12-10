@@ -1,9 +1,10 @@
-﻿using System.Reflection;
-using BuildingBlocks.Constants;
+﻿using BuildingBlocks.Constants;
+using BuildingBlocks.Exceptions;
 using BuildingBlocks.Options;
 using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace BuildingBlocks.Events;
 public static class Extensions
@@ -11,7 +12,7 @@ public static class Extensions
     public static IServiceCollection AddEventBus(this IServiceCollection services, IConfiguration configuration)
     {
         var eventBusSettings = configuration.GetSection(nameof(EventBusSettings)).Get<EventBusSettings>();
-        if (eventBusSettings is null) return services;
+        if (eventBusSettings is null) throw new ConfigurationNotFoundException(nameof(EventBusSettings));
         services.AddMassTransit(config =>
         {
             config.AddConsumers(Assembly.GetEntryAssembly());
