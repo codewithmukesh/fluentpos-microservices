@@ -1,4 +1,6 @@
 ﻿using System.Reflection;
+using BuildingBlocks.Constants;
+using BuildingBlocks.Options;
 using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,20 +10,29 @@ public static class Extensions
 {
     public static IServiceCollection AddEventBus(this IServiceCollection services, IConfiguration configuration)
     {
+        var eventBusSettings = configuration.GetSection(nameof(EventBusSettings)).Get<EventBusSettings>();
+        if (eventBusSettings is null) return services;
         services.AddMassTransit(config =>
         {
             config.AddConsumers(Assembly.GetEntryAssembly());
-            config.UsingRabbitMq((context, configurator) =>
+            if (eventBusSettings.RMQ?.Enable == true)
             {
-                configurator.Host(configuration["MessagingOptions:RabbitMQ"]);
-                configurator.ConfigureEndpoints(context, new KebabCaseEndpointNameFormatter("fluentpos", false));
-            });
+                config.UsingRabbitMq((context, configurator) =>
+                            {
+                                configurator.Host(new Uri($"rabbitmq://{eventBusSettings.RMQ.Host}"), h =>
+                                {
+                                    h.Username(eventBusSettings.RMQ.Username);
+                                    h.Password(eventBusSettings.RMQ.Password);
+                                });
+                                configurator.ConfigureEndpoints(context, new KebabCaseEndpointNameFormatter(ApplicationDefaults.Name, false));
+                            });
+            }
         });
         services.AddOptions<MassTransitHostOptions>()
         .Configure(options =>
         {
             options.WaitUntilStarted = true;
-            options.StartTimeout = TimeSpan.FromSeconds(10);
+            options.StartTimeout = TimeSpan.FromSeconds(5);
             options.StopTimeout = TimeSpan.FromSeconds(30);
         });
         services.AddTransient<IEventBus, MassTransitEventBus>();

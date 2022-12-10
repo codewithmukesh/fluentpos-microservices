@@ -23,7 +23,7 @@ jobs:
       - name: Push Gateway Image
         run: docker push ${{ github.actor }}/fluentpos-gateway --all-tags
       - name: Build Catalog Service Image
-        working-directory: ./src/
-        run: docker build -t ${{ github.actor }}/fluentpos-catalog-service:$(date +%Y%m%d) -t ${{ github.actor }}/fluentpos-catalog-service:latest -f services/catalog/Dockerfile .
+        working-directory: ./
+        run: docker build -t ${{ github.actor }}/fluentpos-catalog-service:$(date +%Y%m%d) -t ${{ github.actor }}/fluentpos-catalog-service:latest -f src/services/catalog/Dockerfile .
       - name: Push Catalog Service Image
         run: docker push ${{ github.actor }}/fluentpos-catalog-service --all-tags     

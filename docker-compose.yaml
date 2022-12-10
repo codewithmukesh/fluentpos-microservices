@@ -19,15 +19,22 @@ services:
      - fluentpos 
   catalog:
     container_name: "catalog-svc"
-    image: iammukeshm/fluentpos-catalog-service
+    #image: iammukeshm/fluentpos-catalog-service
+    build:
+      context: .
+      dockerfile: src/services/catalog/Dockerfile
     pull_policy: always
     environment:
       - ASPNETCORE_ENVIRONMENT=docker.development
       - "ConnectionStrings:DefaultConnection=Server=catalog-pg;Port=5200;Database=catalogDb;User Id=admin;Password=admin"
-      - "MessagingOptions:RabbitMQ=amqp://guest:guest@rabbitmq:5672"
+      - "EventBusSettings:RMQ:Host=rabbitmq"
+      - "EventBusSettings:RMQ:Username=guest"
+      - "EventBusSettings:RMQ:Password=guest"
     depends_on:
-      - rabbitmq
-      - catalog-pg
+      rabbitmq:
+        condition: service_healthy
+      catalog-pg:
+        condition: service_healthy  
     networks:
      - fluentpos    
   catalog-pg:
@@ -53,11 +60,21 @@ services:
     container_name: rabbitmq
     image: rabbitmq:3-management-alpine
     restart: always
+    volumes:
+      - rabbitmq-data:/data/rabbitmq
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 10s
+      timeout: 30s
+      retries: 3
     ports:
-        - "5672:5672"
-        - "15672:15672"
+        - 5672:5672
+        - 15672:15672
+    networks:
+      - fluentpos
 volumes:
   catalog-pg-data:
+  rabbitmq-data:
     
 networks:
   fluentpos:

@@ -1,12 +1,12 @@
 FROM mcr.microsoft.com/dotnet/sdk:7.0-alpine AS build
 WORKDIR /source
 
-COPY ./services/catalog/src/ ./services/catalog/src/
-COPY ./building-blocks/ ./building-blocks/
-COPY ./shared/ ./shared/
+COPY ./src/services/catalog/src/ services/catalog/src/
+COPY ./src/building-blocks/ building-blocks/
+COPY ./src/shared/ shared/
 
-RUN dotnet restore ./services/catalog/src/Catalog.API/Catalog.API.csproj
-RUN dotnet build -c Release --no-restore ./services/catalog/src/Catalog.API/Catalog.API.csproj
+RUN dotnet restore services/catalog/src/Catalog.API/Catalog.API.csproj
+RUN dotnet build -c Release --no-restore services/catalog/src/Catalog.API/Catalog.API.csproj
 
 WORKDIR /source/services/catalog/src/Catalog.API/
 
