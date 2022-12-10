@@ -29,7 +29,7 @@ public class CreateProductCommandHandler : ICommandHandler<CreateProductCommand,
     {
         var product = new Product(command.Name!, command.Description!, command.Price);
         await _context.Products!.AddAsync(product, cancellationToken);
-        await _context.SaveChangesAsync();
+        await _context.SaveChangesAsync(cancellationToken);
 
         var productCreatedEvent = product.Adapt<ProductCreatedEvent>();
         await _eventBus.PublishAsync(productCreatedEvent, token: cancellationToken);
