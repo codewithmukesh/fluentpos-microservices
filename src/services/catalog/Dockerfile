@@ -3,6 +3,7 @@ WORKDIR /source
 
 COPY ./services/catalog/src/ ./services/catalog/src/
 COPY ./building-blocks/ ./building-blocks/
+COPY ./shared/ ./shared/
 
 RUN dotnet restore ./services/catalog/src/Catalog.API/Catalog.API.csproj
 RUN dotnet build -c Release --no-restore ./services/catalog/src/Catalog.API/Catalog.API.csproj
