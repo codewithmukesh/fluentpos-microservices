@@ -24,9 +24,10 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=docker.development
       - "ConnectionStrings:DefaultConnection=Server=catalog-pg;Port=5200;Database=catalogDb;User Id=admin;Password=admin"
+      - "MessagingOptions:RabbitMQ=amqp://guest:guest@rabbitmq:5672"
     depends_on:
-      catalog-pg:
-        condition: service_healthy
+      - rabbitmq
+      - catalog-pg
     networks:
      - fluentpos    
   catalog-pg:
@@ -50,6 +51,7 @@ services:
      - fluentpos   
   rabbitmq:
     container_name: rabbitmq
+    image: rabbitmq:3-management-alpine
     restart: always
     ports:
         - "5672:5672"
