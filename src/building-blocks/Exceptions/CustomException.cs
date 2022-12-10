@@ -14,4 +14,16 @@ public class CustomException : Exception
         ErrorMessages = errors;
         StatusCode = statusCode;
     }
+
+    public CustomException() : base()
+    {
+    }
+
+    public CustomException(string? message) : base(message)
+    {
+    }
+
+    public CustomException(string? message, Exception? innerException) : base(message, innerException)
+    {
+    }
 }
