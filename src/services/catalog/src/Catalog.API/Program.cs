@@ -5,16 +5,20 @@ using BuildingBlocks.Enums;
 using BuildingBlocks.Events;
 using BuildingBlocks.Logging;
 using BuildingBlocks.Middlewares;
+using BuildingBlocks.Validation;
 using BuildingBlocks.WebHostEnvironment;
 using FluentPOS.Catalog.Application;
 using FluentPOS.Catalog.Data;
 using FluentPOS.Catalog.Data.Seeders;
+using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
 // Add services to the container.
 builder.AddCommonLogger(builder.Environment);
 builder.Services.AddControllers();
+builder.Services.AddValidation(typeof(CatalogRoot).Assembly);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(o => o.EnableAnnotations());
