@@ -9,7 +9,7 @@ services:
       - 5010:5010
       - 5100:5100
     environment:
-      - ASPNETCORE_ENVIRONMENT=docker
+      - ASPNETCORE_ENVIRONMENT=docker.development
       - ASPNETCORE_URLS=https://+:5100;http://+:5010
       - ASPNETCORE_Kestrel__Certificates__Default__Password=password!
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/dev_cert.pfx
@@ -22,7 +22,7 @@ services:
     image: iammukeshm/fluentpos-catalog-service
     pull_policy: always
     environment:
-      - ASPNETCORE_ENVIRONMENT=DockerDevelopment
+      - ASPNETCORE_ENVIRONMENT=docker.development
       - "ConnectionStrings:DefaultConnection=Server=catalog-pg;Port=5200;Database=catalogDb;User Id=admin;Password=admin"
     depends_on:
       catalog-pg:
@@ -48,6 +48,12 @@ services:
       retries: 5
     networks:
      - fluentpos   
+  rabbitmq:
+    container_name: rabbitmq
+    restart: always
+    ports:
+        - "5672:5672"
+        - "15672:15672"
 volumes:
   catalog-pg-data:
     

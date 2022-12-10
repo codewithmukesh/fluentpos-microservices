@@ -2,6 +2,7 @@ using BuildingBlocks.Constants;
 using BuildingBlocks.CQRS;
 using BuildingBlocks.EFCore;
 using BuildingBlocks.Enums;
+using BuildingBlocks.Events;
 using BuildingBlocks.Logging;
 using BuildingBlocks.Middlewares;
 using BuildingBlocks.WebHostEnvironment;
@@ -19,6 +20,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(o => o.EnableAnnotations());
 builder.Services.AddEFCoreDbContext<CatalogDbContext>(builder.Configuration, Database.PostgreSQL, ConnectionStrings.DefaultConnection);
 builder.Services.AddScoped<IDataSeeder, ProductDataSeeder>();
+builder.Services.AddEventBus(builder.Configuration);
 // Register BB Services
 builder.Services.UseCommonMediatR(typeof(CatalogRoot).Assembly, enableLoggingBehavior: true);
 builder.Services.AddSingleton<ExceptionMiddleware>();

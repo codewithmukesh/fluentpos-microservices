@@ -32,6 +32,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{AE8EBC13-4C67-4310-88B3-072C886DEFC6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Events", "src\shared\Shared.Events\Shared.Events.csproj", "{E30126EB-E4E4-4FCC-9F1A-AB79EC7F1DE5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,6 +62,10 @@ Global
 		{BDBB3724-D02C-4C61-B33B-063E04C5D686}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDBB3724-D02C-4C61-B33B-063E04C5D686}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDBB3724-D02C-4C61-B33B-063E04C5D686}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E30126EB-E4E4-4FCC-9F1A-AB79EC7F1DE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E30126EB-E4E4-4FCC-9F1A-AB79EC7F1DE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E30126EB-E4E4-4FCC-9F1A-AB79EC7F1DE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E30126EB-E4E4-4FCC-9F1A-AB79EC7F1DE5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -72,6 +80,8 @@ Global
 		{BCCE290E-0746-497D-B45F-0A447B458036} = {D09A4A27-2B44-40EF-BB85-2CFBC8F90082}
 		{10ED41E7-E82F-407E-B19A-DFBEC78D9D73} = {DF86A3C0-EFDA-40C2-AB7A-5181C681AD91}
 		{BDBB3724-D02C-4C61-B33B-063E04C5D686} = {18626C7B-D825-40F7-824E-5A98BAF506C0}
+		{AE8EBC13-4C67-4310-88B3-072C886DEFC6} = {3A641C99-3024-45F3-ABDD-44FA5685CF8F}
+		{E30126EB-E4E4-4FCC-9F1A-AB79EC7F1DE5} = {AE8EBC13-4C67-4310-88B3-072C886DEFC6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CCD4041A-A089-4EA8-AA1F-3FD1FC039445}

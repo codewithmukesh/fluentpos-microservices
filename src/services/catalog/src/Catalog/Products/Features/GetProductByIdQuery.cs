@@ -19,10 +19,12 @@ public class GetProductByIdQuery : IQuery<ProductResponseDto>, ICacheRequest
 internal class GetProductByIdQueryHandler : IQueryHandler<GetProductByIdQuery, ProductResponseDto>
 {
     private readonly CatalogDbContext _catalogDbContext;
+
     public GetProductByIdQueryHandler(CatalogDbContext catalogDbContext)
     {
         _catalogDbContext = catalogDbContext;
     }
+
     public async Task<ProductResponseDto> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
     {
         var product = await _catalogDbContext.Products!.AsQueryable().SingleOrDefaultAsync(x => x.Id == request.Id, cancellationToken);

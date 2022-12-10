@@ -12,4 +12,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\building-blocks\BuildingBlocks.csproj" />
+    <ProjectReference Include="..\..\..\..\shared\Shared.Events\Shared.Events.csproj" />
+  </ItemGroup>
+
 </Project>

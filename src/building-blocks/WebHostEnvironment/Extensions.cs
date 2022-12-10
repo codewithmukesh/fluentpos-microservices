@@ -5,13 +5,12 @@ namespace BuildingBlocks.WebHostEnvironment;
 
 public static class Extensions
 {
-    public static readonly string Development = "Development";
-    public static readonly string Production = "Production";
-    public static readonly string Docker = "Docker";
-    public static readonly string DockerDevelopment = "DockerDevelopment";
+    public static readonly string Development = "development";
+    public static readonly string Production = "production";
+    public static readonly string Docker = "docker";
+    public static readonly string DockerDevelopment = "docker.development";
     public static bool IsDockerDevelopment(this IWebHostEnvironment webHost)
     {
-        if (webHost.IsEnvironment(DockerDevelopment)) return true;
-        return false;
+        return webHost.IsEnvironment(DockerDevelopment);
     }
 }

@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\building-blocks\BuildingBlocks.csproj" />
+    <ProjectReference Include="..\..\..\..\shared\Shared.Events\Shared.Events.csproj" />
   </ItemGroup>
 
 </Project>

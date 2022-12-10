@@ -23,8 +23,8 @@ public class ProductDataSeeder : IDataSeeder
             _logger.LogInformation("Data Seeding for Products Started.");
             var products = new List<Product>
             {
-                Product.Create("Samsung S24", "Top End", 1299),
-                Product.Create("iPhone 15 Pro Max", "Top End", 2299),
+                new Product("Samsung S24", "Top End", 1299),
+                new Product("iPhone 15 Pro Max", "Top End", 2299),
             };
             await _context.Products!.AddRangeAsync(products);
             await _context.SaveChangesAsync();
