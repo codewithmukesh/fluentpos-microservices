@@ -34,7 +34,15 @@ public class ProductsController : BaseController
     public async Task<IActionResult> DeleteAsync(int productId, CancellationToken cancellationToken)
     {
         await Mediator.Send(new DeleteProductCommand(productId), cancellationToken);
-
         return NoContent();
+    }
+
+    [HttpPost("search")]
+    [ProducesResponseType((int)HttpStatusCode.Accepted)]
+    [SwaggerOperation(Summary = "search for products.", Description = "search for products.")]
+    public async Task<IActionResult> SearchAsync(SearchProductsCommand command, CancellationToken cancellationToken)
+    {
+        var result = await Mediator.Send(command, cancellationToken);
+        return Ok(result);
     }
 }

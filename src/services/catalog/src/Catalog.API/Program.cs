@@ -18,10 +18,11 @@ builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsi
 // Add services to the container.
 builder.AddCommonLogger(builder.Environment);
 builder.Services.AddControllers();
+builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddValidation(typeof(CatalogRoot).Assembly);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(o => o.EnableAnnotations());
+builder.Services.AddSwaggerGen(o => { o.EnableAnnotations(); });
 builder.Services.AddEFCoreDbContext<CatalogDbContext>(builder.Configuration, Database.PostgreSQL, ConnectionStrings.DefaultConnection);
 builder.Services.AddScoped<IDataSeeder, ProductDataSeeder>();
 builder.Services.AddEventBus(builder.Configuration);
@@ -37,7 +38,10 @@ app.UseMiddleware<ExceptionMiddleware>();
 if (app.Environment.IsDevelopment() || app.Environment.IsDockerDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(o => o.DefaultModelsExpandDepth(-1));
+    app.UseSwaggerUI(o =>
+    {
+        o.DefaultModelsExpandDepth(-1);
+    });
 }
 
 app.UseHttpsRedirection();

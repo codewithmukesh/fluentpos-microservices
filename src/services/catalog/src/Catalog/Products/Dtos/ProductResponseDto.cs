@@ -1,6 +1,8 @@
+using BuildingBlocks.Dto;
+
 namespace FluentPOS.Catalog.Products.Dtos;
 
-public class ProductResponseDto
+public class ProductResponseDto : IDto
 {
     public int Id { get; set; }
     public string? Name { get; set; }
