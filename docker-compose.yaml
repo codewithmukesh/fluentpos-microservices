@@ -3,7 +3,10 @@ name: fluentpos
 services:
   gateway:
     container_name: "gateway"
-    image: iammukeshm/fluentpos-gateway
+    #image: iammukeshm/fluentpos-gateway
+    build:
+      context: .
+      dockerfile: src/api-gateway/Dockerfile
     pull_policy: always
     ports:
       - 5010:5010
@@ -17,6 +20,39 @@ services:
       - ${USERPROFILE}\.aspnet\https:/https
     networks:
      - fluentpos 
+  identity:
+    container_name: "identity-svc"
+    #image: iammukeshm/fluentpos-identity-service
+    build:
+      context: .
+      dockerfile: src/services/identity/Dockerfile
+    pull_policy: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=docker.development
+    depends_on:
+      identity-pg:
+        condition: service_healthy  
+    networks:
+     - fluentpos    
+  identity-pg:
+    container_name: "identity-db"
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DATABASE=admin
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - PGPORT=5300
+    ports:
+      - 5300:5300
+    volumes:
+      - identity-pg-data:/data/db
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+     - fluentpos   
   catalog:
     container_name: "catalog-svc"
     #image: iammukeshm/fluentpos-catalog-service
@@ -26,10 +62,6 @@ services:
     pull_policy: always
     environment:
       - ASPNETCORE_ENVIRONMENT=docker.development
-      - "ConnectionStrings:DefaultConnection=Server=catalog-pg;Port=5200;Database=catalogDb;User Id=admin;Password=admin"
-      - "EventBusSettings:RMQ:Host=rabbitmq"
-      - "EventBusSettings:RMQ:Username=guest"
-      - "EventBusSettings:RMQ:Password=guest"
     depends_on:
       rabbitmq:
         condition: service_healthy
@@ -50,7 +82,7 @@ services:
     volumes:
       - catalog-pg-data:/data/db
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: ["CMD-SHELL", "pg_isready -U admin"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -74,6 +106,7 @@ services:
       - fluentpos
 volumes:
   catalog-pg-data:
+  identity-pg-data:
   rabbitmq-data:
     
 networks:

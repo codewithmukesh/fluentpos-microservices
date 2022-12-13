@@ -14,6 +14,7 @@ public static class Extensions
             .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
             {
                 options.Authority = jwtOptions.Authority;
+                options.RequireHttpsMetadata = false;
                 options.TokenValidationParameters.ValidateAudience = false;
             });
 

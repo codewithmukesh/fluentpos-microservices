@@ -1,12 +1,13 @@
 FROM mcr.microsoft.com/dotnet/sdk:7.0-alpine AS build
 WORKDIR /source
 
-COPY . .
+COPY ./src/api-gateway api-gateway/
+COPY ./src/building-blocks/ building-blocks/
 
-RUN dotnet restore ./Gateway.csproj
-RUN dotnet build -c Release --no-restore ./Gateway.csproj
+RUN dotnet restore ./api-gateway/Gateway.csproj
+RUN dotnet build -c Release --no-restore ./api-gateway/Gateway.csproj
 
-WORKDIR /source
+WORKDIR /source/api-gateway/
 
 RUN dotnet publish -c Release --no-build -o /app
 
