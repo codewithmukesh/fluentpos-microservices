@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace FluentPOS.Services.Identity.Host.Controllers;
+namespace FluentPOS.Identity.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

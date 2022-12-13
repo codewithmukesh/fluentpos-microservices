@@ -1,28 +1,23 @@
-using BuildingBlocks.Events;
+using BuildingBlocks.Constants;
+using BuildingBlocks.EFCore;
+using BuildingBlocks.Enums;
 using BuildingBlocks.Logging;
+using BuildingBlocks.Middlewares;
+using FluentPOS.Identity.API.Data;
+using FluentPOS.Identity.API.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-builder.AddCommonLogger(builder.Environment);
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddEventBus(builder.Configuration);
+builder.AddCommonLoging(builder.Environment);
+builder.Services.AddAuthorization();
+builder.Services.AddSingleton<ExceptionMiddleware>();
+builder.Services.AddEFCoreDbContext<IdentityContext>(builder.Configuration, Database.PostgreSQL, ConnectionStrings.DefaultConnection);
+builder.Services.AddScoped<IDataSeeder, IdentityDataSeeder>();
+builder.Services.AddIdentityServer(builder.Environment);
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
+app.UseEFCoreMigration<IdentityContext>(builder.Environment);
+app.UseMiddleware<ExceptionMiddleware>();
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
-
-app.MapControllers();
-
+app.UseIdentityServer();
 app.Run();

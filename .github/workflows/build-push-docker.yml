@@ -22,8 +22,13 @@ jobs:
         run: docker build -t ${{ github.actor }}/fluentpos-gateway:$(date +%Y%m%d) -t ${{ github.actor }}/fluentpos-gateway:latest .
       - name: Push Gateway Image
         run: docker push ${{ github.actor }}/fluentpos-gateway --all-tags
+      - name: Build Identity Service Image
+        working-directory: ./
+        run: docker build -t ${{ github.actor }}/fluentpos-identity-service:$(date +%Y%m%d) -t ${{ github.actor }}/fluentpos-identity-service:latest -f src/services/identity/Dockerfile .
+      - name: Push Identity Service Image
+        run: docker push ${{ github.actor }}/fluentpos-identity-service --all-tags
       - name: Build Catalog Service Image
         working-directory: ./
         run: docker build -t ${{ github.actor }}/fluentpos-catalog-service:$(date +%Y%m%d) -t ${{ github.actor }}/fluentpos-catalog-service:latest -f src/services/catalog/Dockerfile .
       - name: Push Catalog Service Image
-        run: docker push ${{ github.actor }}/fluentpos-catalog-service --all-tags     
+        run: docker push ${{ github.actor }}/fluentpos-catalog-service --all-tags       

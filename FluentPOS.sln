@@ -34,7 +34,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{AE8EBC13-4C67-4310-88B3-072C886DEFC6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Events", "src\shared\Shared.Events\Shared.Events.csproj", "{E30126EB-E4E4-4FCC-9F1A-AB79EC7F1DE5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.Events", "src\shared\Shared.Events\Shared.Events.csproj", "{E30126EB-E4E4-4FCC-9F1A-AB79EC7F1DE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -12,7 +12,7 @@ namespace BuildingBlocks.Logging;
 
 public static class Extensions
 {
-    public static WebApplicationBuilder AddCommonLogger(this WebApplicationBuilder builder, IWebHostEnvironment env)
+    public static WebApplicationBuilder AddCommonLoging(this WebApplicationBuilder builder, IWebHostEnvironment env)
     {
         _ = builder.Host.UseSerilog((context, services, loggerConfiguration) =>
         {

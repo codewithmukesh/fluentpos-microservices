@@ -12,4 +12,8 @@
     <PackageReference Include="Yarp.ReverseProxy" Version="1.1.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\building-blocks\BuildingBlocks.csproj" />
+  </ItemGroup>
+
 </Project>

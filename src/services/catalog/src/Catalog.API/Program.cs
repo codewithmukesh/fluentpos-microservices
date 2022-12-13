@@ -5,6 +5,7 @@ using BuildingBlocks.Enums;
 using BuildingBlocks.Events;
 using BuildingBlocks.Logging;
 using BuildingBlocks.Middlewares;
+using BuildingBlocks.OpenID;
 using BuildingBlocks.Validation;
 using BuildingBlocks.WebHostEnvironment;
 using FluentPOS.Catalog.Application;
@@ -16,7 +17,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
 // Add services to the container.
-builder.AddCommonLogger(builder.Environment);
+builder.AddCommonLoging(builder.Environment);
 builder.Services.AddControllers();
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddValidation(typeof(CatalogRoot).Assembly);
@@ -26,6 +27,11 @@ builder.Services.AddSwaggerGen(o => { o.EnableAnnotations(); });
 builder.Services.AddEFCoreDbContext<CatalogDbContext>(builder.Configuration, Database.PostgreSQL, ConnectionStrings.DefaultConnection);
 builder.Services.AddScoped<IDataSeeder, ProductDataSeeder>();
 builder.Services.AddEventBus(builder.Configuration);
+
+//Auth
+builder.Services.AddJWT();
+
+
 // Register BB Services
 builder.Services.UseCommonMediatR(typeof(CatalogRoot).Assembly, enableLoggingBehavior: true);
 builder.Services.AddSingleton<ExceptionMiddleware>();
@@ -46,8 +52,9 @@ if (app.Environment.IsDevelopment() || app.Environment.IsDockerDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-app.MapGet("/", () => "Hello From Catalog Service!");
+app.MapGet("/", () => "Hello From Catalog Service!").RequireAuthorization();
 app.Run();

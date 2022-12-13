@@ -4,17 +4,20 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>FluentPOS.Services.Identity.Host</RootNamespace>
-    <AssemblyName>FluentPOS.Services.Identity.Host</AssemblyName>
+    <RootNamespace>FluentPOS.Identity.API</RootNamespace>
+    <AssemblyName>FluentPOS.Identity.API</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+      <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.0">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\building-blocks\BuildingBlocks.csproj" />
-    <ProjectReference Include="..\..\..\..\shared\Shared.Events\Shared.Events.csproj" />
   </ItemGroup>
 
 </Project>
