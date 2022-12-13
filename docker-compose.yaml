@@ -41,9 +41,9 @@ services:
       - POSTGRES_DATABASE=admin
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin
-      - PGPORT=5300
+      - PGPORT=5210
     ports:
-      - 5300:5300
+      - 5210:5210
     volumes:
       - identity-pg-data:/data/db
     healthcheck:
@@ -76,9 +76,9 @@ services:
       - POSTGRES_DATABASE=admin
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin
-      - PGPORT=5200
+      - PGPORT=5310
     ports:
-      - 5200:5200
+      - 5310:5310
     volumes:
       - catalog-pg-data:/data/db
     healthcheck:

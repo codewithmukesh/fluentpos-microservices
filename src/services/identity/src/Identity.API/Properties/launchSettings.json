@@ -6,7 +6,7 @@
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": ".well-known/openid-configuration",
-      "applicationUrl": "http://localhost:6010;https://localhost:6100",
+      "applicationUrl": "http://localhost:5020;https://localhost:5200",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
