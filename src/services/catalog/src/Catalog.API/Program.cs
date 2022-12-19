@@ -1,3 +1,4 @@
+using BuildingBlocks.Auth;
 using BuildingBlocks.Constants;
 using BuildingBlocks.CQRS;
 using BuildingBlocks.EFCore;
@@ -27,6 +28,7 @@ builder.Services.AddSwaggerGen(o => { o.EnableAnnotations(); });
 builder.Services.AddEFCoreDbContext<CatalogDbContext>(builder.Configuration, Database.PostgreSQL, ConnectionStrings.DefaultConnection);
 builder.Services.AddScoped<IDataSeeder, ProductDataSeeder>();
 builder.Services.AddEventBus(builder.Configuration);
+builder.Services.AddCurrentUser();
 
 //Auth
 builder.Services.AddJWT();
