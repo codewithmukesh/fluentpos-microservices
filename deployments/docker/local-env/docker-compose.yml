@@ -1,0 +1,82 @@
+version: '3.8'
+name: fluentpos-local-dev
+services:
+  es01:
+    container_name: es01-local
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.10.2
+    ports:
+      - 9200:9200
+      - 9300:9300
+    environment:
+      node.name: es01
+      discovery.seed_hosts: es01
+      cluster.initial_master_nodes: es01
+      cluster.name: elasticcluster
+      bootstrap.memory_lock: "true"
+      ES_JAVA_OPTS: -Xms256m -Xmx256m
+    volumes:
+      - "es-data-es01:/usr/share/elasticsearch/data"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    healthcheck:
+      test: ["CMD-SHELL", "curl http://localhost:9200"]
+      interval: 10s
+      timeout: 10s
+      retries: 120
+    networks:
+      - fluentpos  
+  kibana:
+    container_name: kibana-local
+    image: docker.elastic.co/kibana/kibana-oss:7.10.2
+    ports:
+      - 5601:5601
+    depends_on:
+      es01:
+        condition: service_healthy
+    environment:
+      - 'ELASTICSEARCH_HOSTS=["http://es01:9200"]'
+    networks:
+      - fluentpos 
+  pg-db:
+    container_name: pg-db-local
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DATABASE=admin
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+    ports:
+      - 5433:5433
+    volumes:
+      - pg-data:/data/db
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+     - fluentpos 
+  rabbitmq:
+    container_name: rabbitmq-local
+    image: rabbitmq:3-management-alpine
+    restart: always
+    volumes:
+      - rabbitmq-data:/data/rabbitmq
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 10s
+      timeout: 30s
+      retries: 3
+    ports:
+        - 5672:5672
+        - 15672:15672
+    networks:
+      - fluentpos 
+volumes:
+  es-data-es01:
+  pg-data:
+  rabbitmq-data:
+networks:
+  fluentpos:
+    name:  fluentpos   

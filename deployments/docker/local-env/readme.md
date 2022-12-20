@@ -1,0 +1,1 @@
+to provision all the required services, use this docker compose file.
