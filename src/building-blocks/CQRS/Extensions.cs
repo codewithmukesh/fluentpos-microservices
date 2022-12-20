@@ -7,7 +7,7 @@ namespace BuildingBlocks.CQRS;
 
 public static class Extensions
 {
-    public static IServiceCollection UseCommonMediatR(this IServiceCollection services, Assembly mediatrAssembly, bool enableLoggingBehavior = true)
+    public static IServiceCollection RegisterMediatR(this IServiceCollection services, Assembly mediatrAssembly, bool enableLoggingBehavior = true)
     {
         services.AddMediatR(mediatrAssembly);
         if (enableLoggingBehavior) services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));

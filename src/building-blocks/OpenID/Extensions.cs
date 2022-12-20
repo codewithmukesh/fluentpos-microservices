@@ -1,4 +1,5 @@
-﻿using BuildingBlocks.Web;
+﻿using BuildingBlocks.Auth;
+using BuildingBlocks.Web;
 using Duende.IdentityServer.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
@@ -6,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace BuildingBlocks.OpenID;
 public static class Extensions
 {
-    public static IServiceCollection AddJWT(this IServiceCollection services)
+    public static IServiceCollection RegisterJWTAuth(this IServiceCollection services)
     {
         var jwtOptions = services.GetOptions<JwtBearerOptions>("Jwt");
 
@@ -28,6 +29,9 @@ public static class Extensions
                 })
             );
         }
+
+        services.AddHttpContextAccessor();
+        services.AddScoped<IAuthenticatedUser, AuthenticatedUser>();
 
         return services;
     }

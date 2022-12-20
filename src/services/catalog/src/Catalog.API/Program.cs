@@ -1,4 +1,3 @@
-using BuildingBlocks.Auth;
 using BuildingBlocks.Constants;
 using BuildingBlocks.CQRS;
 using BuildingBlocks.EFCore;
@@ -7,50 +6,44 @@ using BuildingBlocks.Events;
 using BuildingBlocks.Logging;
 using BuildingBlocks.Middlewares;
 using BuildingBlocks.OpenID;
+using BuildingBlocks.Options;
+using BuildingBlocks.Swagger;
 using BuildingBlocks.Validation;
-using BuildingBlocks.WebHostEnvironment;
+using BuildingBlocks.Web;
 using FluentPOS.Catalog.Application;
 using FluentPOS.Catalog.Data;
 using FluentPOS.Catalog.Data.Seeders;
-using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
+var env = builder.Environment;
+var appConfig = builder.Services.GetRequiredConfiguration<AppConfig>();
 
-builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
 // Add services to the container.
-builder.AddCommonLoging(builder.Environment);
+builder.RegisterSerilog(builder.Environment, appConfig.Name);
 builder.Services.AddControllers();
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
-builder.Services.AddValidation(typeof(CatalogRoot).Assembly);
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(o => { o.EnableAnnotations(); });
-builder.Services.AddEFCoreDbContext<CatalogDbContext>(builder.Configuration, Database.PostgreSQL, ConnectionStrings.DefaultConnection);
+builder.Services.RegisterValidators(typeof(CatalogRoot).Assembly);
+builder.Services.RegisterSwagger(appConfig.Name);
+
+builder.Services.RegisterContext<CatalogDbContext>(builder.Configuration, Database.PostgreSQL, ConnectionStrings.DefaultConnection);
 builder.Services.AddScoped<IDataSeeder, ProductDataSeeder>();
-builder.Services.AddEventBus(builder.Configuration);
-builder.Services.AddCurrentUser();
+builder.Services.RegisterEventBus(builder.Configuration);
 
 //Auth
-builder.Services.AddJWT();
+builder.Services.RegisterJWTAuth();
 
 
 // Register BB Services
-builder.Services.UseCommonMediatR(typeof(CatalogRoot).Assembly, enableLoggingBehavior: true);
+builder.Services.RegisterMediatR(typeof(CatalogRoot).Assembly, enableLoggingBehavior: true);
 builder.Services.AddSingleton<ExceptionMiddleware>();
 var app = builder.Build();
 
 //
-app.UseEFCoreMigration<CatalogDbContext>(builder.Environment);
+app.ConfigureMigrations<CatalogDbContext>(builder.Environment);
 app.UseMiddleware<ExceptionMiddleware>();
+
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment() || app.Environment.IsDockerDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI(o =>
-    {
-        o.DefaultModelsExpandDepth(-1);
-    });
-}
+app.ConfigureSwagger();
 
 app.UseHttpsRedirection();
 

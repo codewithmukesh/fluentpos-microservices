@@ -9,21 +9,21 @@ using System.Reflection;
 namespace BuildingBlocks.Events;
 public static class Extensions
 {
-    public static IServiceCollection AddEventBus(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection RegisterEventBus(this IServiceCollection services, IConfiguration configuration)
     {
-        var eventBusSettings = configuration.GetSection(nameof(EventBusSettings)).Get<EventBusSettings>();
-        if (eventBusSettings is null) throw new ConfigurationNotFoundException(nameof(EventBusSettings));
+        var eventBusConfig = configuration.GetSection(nameof(EventBusConfig)).Get<EventBusConfig>();
+        if (eventBusConfig is null) throw new ConfigurationNotFoundException(nameof(EventBusConfig));
         services.AddMassTransit(config =>
         {
             config.AddConsumers(Assembly.GetEntryAssembly());
-            if (eventBusSettings.RMQ?.Enable == true)
+            if (eventBusConfig.RMQ?.Enable == true)
             {
                 config.UsingRabbitMq((context, configurator) =>
                             {
-                                configurator.Host(new Uri($"rabbitmq://{eventBusSettings.RMQ.Host}"), h =>
+                                configurator.Host(new Uri($"rabbitmq://{eventBusConfig.RMQ.Host}"), h =>
                                 {
-                                    h.Username(eventBusSettings.RMQ.Username);
-                                    h.Password(eventBusSettings.RMQ.Password);
+                                    h.Username(eventBusConfig.RMQ.Username);
+                                    h.Password(eventBusConfig.RMQ.Password);
                                 });
                                 configurator.ConfigureEndpoints(context, new KebabCaseEndpointNameFormatter(ApplicationDefaults.Name, false));
                             });

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using BuildingBlocks.Options;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,6 +18,15 @@ public static class Extensions
         var model = new TModel();
         var configuration = service.BuildServiceProvider().GetService<IConfiguration>();
         configuration?.GetSection(section).Bind(model);
+        return model;
+    }
+
+    public static TModel GetRequiredConfiguration<TModel>(this IServiceCollection service) where TModel : IConfig, new()
+    {
+        var section = typeof(TModel).Name;
+        var model = new TModel();
+        var configuration = service.BuildServiceProvider().GetService<IConfiguration>();
+        configuration?.GetRequiredSection(section).Bind(model);
         return model;
     }
 

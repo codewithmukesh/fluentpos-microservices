@@ -12,7 +12,7 @@ namespace BuildingBlocks.EFCore;
 
 public static class Extensions
 {
-    public static IServiceCollection AddEFCoreDbContext<T>(this IServiceCollection services, IConfiguration configuration, Database databaseChoice, string connectionStringName)
+    public static IServiceCollection RegisterContext<T>(this IServiceCollection services, IConfiguration configuration, Database databaseChoice, string connectionStringName)
         where T : DbContext
     {
         var assemblyName = typeof(T).Assembly.GetName().Name;
@@ -30,7 +30,7 @@ public static class Extensions
         return services;
     }
 
-    public static IApplicationBuilder UseEFCoreMigration<T>(this IApplicationBuilder applicationBuilder, IWebHostEnvironment webHostEnvironment)
+    public static IApplicationBuilder ConfigureMigrations<T>(this IApplicationBuilder applicationBuilder, IWebHostEnvironment webHostEnvironment)
     where T : DbContext
     {
         MigrateDatabaseAsync<T>(applicationBuilder.ApplicationServices).GetAwaiter().GetResult();

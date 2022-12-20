@@ -6,7 +6,7 @@ using System.Reflection;
 namespace BuildingBlocks.Validation;
 public static class Extensions
 {
-    public static IServiceCollection AddValidation(this IServiceCollection services, Assembly assemblyContainingValidators)
+    public static IServiceCollection RegisterValidators(this IServiceCollection services, Assembly assemblyContainingValidators)
     {
         services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
         services.AddValidatorsFromAssembly(assemblyContainingValidators);

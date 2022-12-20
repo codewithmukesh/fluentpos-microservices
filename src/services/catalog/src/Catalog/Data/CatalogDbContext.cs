@@ -7,6 +7,6 @@ namespace FluentPOS.Catalog.Data;
 
 public sealed class CatalogDbContext : DbContextBase
 {
-    public CatalogDbContext(DbContextOptions options, ICurrentUserService currentUser) : base(options, currentUser) { }
+    public CatalogDbContext(DbContextOptions options, IAuthenticatedUser currentUser) : base(options, currentUser) { }
     public DbSet<Product>? Products { get; set; }
 }

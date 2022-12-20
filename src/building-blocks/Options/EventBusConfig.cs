@@ -1,6 +1,6 @@
 namespace BuildingBlocks.Options;
 
-public class EventBusSettings
+public class EventBusConfig : IConfig
 {
     public RMQ? RMQ { get; set; }
 }
