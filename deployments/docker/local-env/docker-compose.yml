@@ -46,6 +46,7 @@ services:
       - POSTGRES_DATABASE=admin
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin
+      - PGPORT=5433
     ports:
       - 5433:5433
     volumes:
@@ -71,6 +72,9 @@ services:
     ports:
         - 5672:5672
         - 15672:15672
+    depends_on:
+      pg-db:
+        condition: service_healthy 
     networks:
       - fluentpos 
 volumes:
@@ -79,4 +83,4 @@ volumes:
   rabbitmq-data:
 networks:
   fluentpos:
-    name:  fluentpos   
+    name:  fluentpos
