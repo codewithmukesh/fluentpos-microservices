@@ -1,9 +1,9 @@
+using BuildingBlocks.Configs;
 using BuildingBlocks.Constants;
 using BuildingBlocks.EFCore;
 using BuildingBlocks.Enums;
 using BuildingBlocks.Logging;
 using BuildingBlocks.Middlewares;
-using BuildingBlocks.Options;
 using BuildingBlocks.Web;
 using FluentPOS.Identity.API.Data;
 using FluentPOS.Identity.API.Extensions;

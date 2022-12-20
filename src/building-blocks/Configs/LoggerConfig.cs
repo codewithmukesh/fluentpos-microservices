@@ -1,6 +1,6 @@
-﻿namespace BuildingBlocks.Logging;
+﻿namespace BuildingBlocks.Configs;
 
-public class LogConfig
+public class LoggerConfig
 {
     public string? Level { get; set; } = "Information";
     public string? LogTemplate { get; set; } = "{Timestamp:HH:mm:ss} [{Level:u4}] {Message:lj}{NewLine}{Exception}";

@@ -1,4 +1,5 @@
 ﻿using BuildingBlocks.Auth;
+using BuildingBlocks.Configs;
 using BuildingBlocks.Web;
 using Duende.IdentityServer.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -9,23 +10,23 @@ public static class Extensions
 {
     public static IServiceCollection RegisterJWTAuth(this IServiceCollection services)
     {
-        var jwtOptions = services.GetOptions<JwtBearerOptions>("Jwt");
+        var authConfig = services.GetRequiredConfiguration<AuthConfig>();
 
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
             {
-                options.Authority = jwtOptions.Authority;
+                options.Authority = authConfig.Authority;
                 options.RequireHttpsMetadata = false;
                 options.TokenValidationParameters.ValidateAudience = false;
             });
 
-        if (!string.IsNullOrEmpty(jwtOptions.Audience))
+        if (!string.IsNullOrEmpty(authConfig.Audience))
         {
             services.AddAuthorization(options =>
                 options.AddPolicy(nameof(ApiScope), policy =>
                 {
                     policy.RequireAuthenticatedUser();
-                    policy.RequireClaim("scope", jwtOptions.Audience);
+                    policy.RequireClaim("scope", authConfig.Audience);
                 })
             );
         }

@@ -1,3 +1,4 @@
+using BuildingBlocks.Configs;
 using BuildingBlocks.Constants;
 using BuildingBlocks.CQRS;
 using BuildingBlocks.EFCore;
@@ -6,7 +7,6 @@ using BuildingBlocks.Events;
 using BuildingBlocks.Logging;
 using BuildingBlocks.Middlewares;
 using BuildingBlocks.OpenID;
-using BuildingBlocks.Options;
 using BuildingBlocks.Swagger;
 using BuildingBlocks.Validation;
 using BuildingBlocks.Web;

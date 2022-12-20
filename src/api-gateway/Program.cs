@@ -1,11 +1,11 @@
+using BuildingBlocks.Configs;
 using BuildingBlocks.Logging;
 using BuildingBlocks.OpenID;
-using BuildingBlocks.Options;
 using BuildingBlocks.Web;
 using Microsoft.AspNetCore.Authentication;
 
 var builder = WebApplication.CreateBuilder(args);
-var appConfig = builder.Services.GetOptions<AppConfig>("AppConfig");
+var appConfig = builder.Services.GetRequiredConfiguration<AppConfig>();
 builder.RegisterSerilog(builder.Environment, appConfig.Name);
 builder.Services.RegisterJWTAuth();
 builder.Services.AddReverseProxy().LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));

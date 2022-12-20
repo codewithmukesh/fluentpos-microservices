@@ -1,4 +1,5 @@
-﻿using BuildingBlocks.Constants;
+﻿using BuildingBlocks.Configs;
+using BuildingBlocks.Constants;
 using BuildingBlocks.Exceptions;
 using Figgle;
 using Microsoft.AspNetCore.Builder;
@@ -19,8 +20,8 @@ public static class Extensions
         _ = builder.Host.UseSerilog((context, services, loggerConfiguration) =>
         {
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-            var loggerOptions = context.Configuration.GetSection(nameof(LogConfig)).Get<LogConfig>();
-            if (loggerOptions is null) throw new ConfigurationNotFoundException(nameof(LogConfig));
+            var loggerOptions = context.Configuration.GetSection(nameof(LoggerConfig)).Get<LoggerConfig>();
+            if (loggerOptions is null) throw new ConfigurationNotFoundException(nameof(LoggerConfig));
             var logLevel = Enum.TryParse<LogEventLevel>(
                 loggerOptions.Level,
                 true,

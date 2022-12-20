@@ -1,6 +1,6 @@
-﻿using BuildingBlocks.Constants;
+﻿using BuildingBlocks.Configs;
+using BuildingBlocks.Constants;
 using BuildingBlocks.Exceptions;
-using BuildingBlocks.Options;
 using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

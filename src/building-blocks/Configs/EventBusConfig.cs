@@ -1,4 +1,4 @@
-namespace BuildingBlocks.Options;
+namespace BuildingBlocks.Configs;
 
 public class EventBusConfig : IConfig
 {
