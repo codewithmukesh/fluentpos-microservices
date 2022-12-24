@@ -4,8 +4,7 @@
     "Identity": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": true,
-      "launchUrl": ".well-known/openid-configuration",
+      "launchBrowser": false,
       "applicationUrl": "http://localhost:5020;https://localhost:5200",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

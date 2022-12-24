@@ -8,11 +8,11 @@ namespace FluentPOS.Catalog.API.Controllers;
 
 public class ProductsController : BaseController
 {
-    [HttpGet("{productId:int}")]
+    [HttpGet("{productId:Guid}")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     [SwaggerOperation(Summary = "gets product by id.", Description = "gets product by id.")]
-    public async Task<IActionResult> GetByIdAsync(int productId, CancellationToken cancellationToken)
+    public async Task<IActionResult> GetByIdAsync(Guid productId, CancellationToken cancellationToken)
     {
         var result = await Mediator.Send(new GetProductByIdQuery(productId), cancellationToken);
         return Ok(result);
@@ -27,11 +27,11 @@ public class ProductsController : BaseController
         return Created(nameof(CreateAsync), new { id = result });
     }
 
-    [HttpDelete("{productId:int}")]
+    [HttpDelete("{productId:Guid}")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     [SwaggerOperation(Summary = "deletes a product by id.", Description = "deletes a product by id.")]
-    public async Task<IActionResult> DeleteAsync(int productId, CancellationToken cancellationToken)
+    public async Task<IActionResult> DeleteAsync(Guid productId, CancellationToken cancellationToken)
     {
         await Mediator.Send(new DeleteProductCommand(productId), cancellationToken);
         return NoContent();

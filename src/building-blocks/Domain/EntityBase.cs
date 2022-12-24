@@ -1,10 +1,11 @@
-﻿namespace BuildingBlocks.Domain;
-public abstract class EntityBase : IEntityBase
-{
-    public int Id { get; set; }
-}
+﻿using MassTransit;
 
-public interface IEntityBase
+namespace BuildingBlocks.Domain;
+public abstract class EntityBase : IEntity
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; } = NewId.Next().ToGuid();
+}
+public interface IEntity
+{
+    Guid Id { get; protected set; }
 }

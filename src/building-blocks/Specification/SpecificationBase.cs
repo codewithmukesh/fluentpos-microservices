@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 
 namespace BuildingBlocks.Specification;
-public abstract class SpecificationBase<T> : ISpecification<T> where T : class, IEntityBase
+public abstract class SpecificationBase<T> : ISpecification<T> where T : class, IEntity
 {
     public Expression<Func<T, bool>>? Criteria { get; set; }
     public List<Expression<Func<T, object>>> Includes { get; } = new();

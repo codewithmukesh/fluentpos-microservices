@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 
 namespace BuildingBlocks.Specification;
-public interface ISpecification<T> where T : class, IEntityBase
+public interface ISpecification<T> where T : class, IEntity
 {
     Expression<Func<T, bool>>? Criteria { get; }
     List<Expression<Func<T, object>>> Includes { get; }

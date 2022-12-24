@@ -7,14 +7,14 @@ using Mapster;
 
 namespace FluentPOS.Catalog.Products.Features;
 
-public class CreateProductCommand : ICommand<int>
+public class CreateProductCommand : ICommand<Guid>
 {
     public string? Name { get; set; }
     public string? Description { get; set; }
     public decimal Price { get; set; }
 }
 
-public class CreateProductCommandHandler : ICommandHandler<CreateProductCommand, int>
+public class CreateProductCommandHandler : ICommandHandler<CreateProductCommand, Guid>
 {
     private readonly CatalogDbContext _context;
     private readonly IEventBus _eventBus;
@@ -25,7 +25,7 @@ public class CreateProductCommandHandler : ICommandHandler<CreateProductCommand,
         _eventBus = eventBus;
     }
 
-    public async Task<int> Handle(CreateProductCommand command, CancellationToken cancellationToken)
+    public async Task<Guid> Handle(CreateProductCommand command, CancellationToken cancellationToken)
     {
         var product = new Product(command.Name!, command.Description!, command.Price);
         await _context.Products!.AddAsync(product, cancellationToken);

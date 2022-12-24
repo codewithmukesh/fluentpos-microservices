@@ -5,15 +5,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FluentPOS.Catalog.Products.Features;
 
-public class DeleteProductCommand : ICommand<int>
+public class DeleteProductCommand : ICommand<Guid>
 {
-    public DeleteProductCommand(int productId)
+    public DeleteProductCommand(Guid productId)
     {
         Id = productId;
     }
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 }
-public class DeleteProductCommandHandler : ICommandHandler<DeleteProductCommand, int>
+public class DeleteProductCommandHandler : ICommandHandler<DeleteProductCommand, Guid>
 {
     private readonly CatalogDbContext _context;
 
@@ -21,7 +21,7 @@ public class DeleteProductCommandHandler : ICommandHandler<DeleteProductCommand,
     {
         _context = context;
     }
-    public async Task<int> Handle(DeleteProductCommand command, CancellationToken cancellationToken)
+    public async Task<Guid> Handle(DeleteProductCommand command, CancellationToken cancellationToken)
     {
         var product = await _context.Products!.AsQueryable().SingleOrDefaultAsync(x => x.Id == command.Id, cancellationToken);
         if (product is null) throw new ProductNotFoundException(command.Id);

@@ -6,7 +6,7 @@ namespace BuildingBlocks.Pagination;
 public static class Extensions
 {
     public static async Task<PaginatedDtoResponse<TDto>> ToPaginatedDtoListAsync<T, TDto>(this IQueryable<T> source, int pageNumber, int pageSize)
-        where T : class, IEntityBase
+        where T : class, IEntity
         where TDto : IDto
     {
         if (source == null) throw new ApplicationException();

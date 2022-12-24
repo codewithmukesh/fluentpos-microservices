@@ -10,10 +10,10 @@ namespace FluentPOS.Catalog.Products.Features;
 
 public class GetProductByIdQuery : IQuery<ProductResponseDto>, ICacheRequest
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     public string? CacheKey => nameof(GetProductByIdQuery);
 
-    public GetProductByIdQuery(int id) => Id = id;
+    public GetProductByIdQuery(Guid id) => Id = id;
 }
 
 internal class GetProductByIdQueryHandler : IQueryHandler<GetProductByIdQuery, ProductResponseDto>

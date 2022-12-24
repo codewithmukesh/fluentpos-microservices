@@ -30,7 +30,7 @@ public static class Extensions
         return Expression.Lambda<Func<T, bool>>(body, p);
     }
 
-    public static IQueryable<T> Specify<T>(this IQueryable<T> query, ISpecification<T> spec) where T : class, IEntityBase
+    public static IQueryable<T> Specify<T>(this IQueryable<T> query, ISpecification<T> spec) where T : class, IEntity
     {
         var queryableResultWithIncludes = spec.Includes
             .Aggregate(query,

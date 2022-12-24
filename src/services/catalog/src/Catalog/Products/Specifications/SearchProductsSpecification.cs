@@ -6,7 +6,7 @@ internal class SearchProductsSpecification : SpecificationBase<Product>
 {
     public SearchProductsSpecification(string searchString, decimal minimumPrice = decimal.Zero, decimal maximumPrice = decimal.MaxValue)
     {
-        Criteria = p => p.Id > 0;
+        Criteria = p => p.Id != Guid.Empty;
 
         if (!string.IsNullOrEmpty(searchString))
         {
