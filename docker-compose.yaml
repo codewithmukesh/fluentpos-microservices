@@ -42,10 +42,10 @@ services:
     
   gateway:
     container_name: "gateway"
-    #image: iammukeshm/fluentpos-gateway
-    build:
-      context: .
-      dockerfile: src/api-gateway/Dockerfile
+    image: iammukeshm/fluentpos-gateway
+    # build:
+    #   context: .
+    #   dockerfile: src/api-gateway/Dockerfile
     pull_policy: always
     ports:
       - 5010:5010
@@ -61,10 +61,10 @@ services:
      - fluentpos 
   identity:
     container_name: "identity-svc"
-    #image: iammukeshm/fluentpos-identity-service
-    build:
-      context: .
-      dockerfile: src/services/identity/Dockerfile
+    image: iammukeshm/fluentpos-identity-service
+    # build:
+    #   context: .
+    #   dockerfile: src/services/identity/Dockerfile
     pull_policy: always
     environment:
       - ASPNETCORE_ENVIRONMENT=docker.development
@@ -94,10 +94,10 @@ services:
      - fluentpos   
   catalog:
     container_name: "catalog-svc"
-    #image: iammukeshm/fluentpos-catalog-service
-    build:
-      context: .
-      dockerfile: src/services/catalog/Dockerfile
+    image: iammukeshm/fluentpos-catalog-service
+    # build:
+    #   context: .
+    #   dockerfile: src/services/catalog/Dockerfile
     pull_policy: always
     environment:
       - ASPNETCORE_ENVIRONMENT=docker.development

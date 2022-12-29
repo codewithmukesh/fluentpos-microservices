@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "BuildingBlocks": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:56213;http://localhost:56215"
+    }
+  }
+}
