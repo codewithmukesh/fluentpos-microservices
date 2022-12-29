@@ -8,7 +8,7 @@ using Sales.Data;
 
 #nullable disable
 
-namespace FluentPOS.Sales.Data.Migrations
+namespace FluentPOS.Sales.Application.Data.Migrations
 {
     [DbContext(typeof(SaleDbContext))]
     partial class SaleDbContextModelSnapshot : ModelSnapshot

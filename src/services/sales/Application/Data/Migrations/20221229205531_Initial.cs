@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace FluentPOS.Sales.Data.Migrations
+namespace FluentPOS.Sales.Application.Data.Migrations
 {
     /// <inheritdoc />
     public partial class Initial : Migration

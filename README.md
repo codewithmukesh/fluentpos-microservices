@@ -32,5 +32,5 @@ dotnet dev-certs https --trust
 
 ### Adding Migrations
 
-Always runs this from the API Project where EF Design is referenced.
-`dotnet ef migrations add ChangedToGuid --project ../Catalog/ -o Data/Migrations `
+Always runs this from the Host Project where EF Design is referenced.
+`dotnet ef migrations add <commit-message> --project ../Application/ -o Data/Migrations `

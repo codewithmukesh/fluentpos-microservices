@@ -9,10 +9,10 @@ using Sales.Data;
 
 #nullable disable
 
-namespace FluentPOS.Sales.Data.Migrations
+namespace FluentPOS.Sales.Application.Data.Migrations
 {
     [DbContext(typeof(SaleDbContext))]
-    [Migration("20221228194435_Initial")]
+    [Migration("20221229205531_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
